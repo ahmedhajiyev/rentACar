@@ -36,15 +36,6 @@ public class BrandManager implements BrandService {
 	}
 
 
-	@Override
-	public void add(CreateBrandRequest createBrandRequest) {
-		
-		this.brandBusinessRules.checkIfBrandNameExists(createBrandRequest.getName());
-		
-		Brand brand = this.modelMapperService.forRequest().map(createBrandRequest, Brand.class);	
-
-		this.brandRepository.save(brand);	
-	}
 
 
 	@Override
@@ -57,11 +48,20 @@ public class BrandManager implements BrandService {
 		return response;
 	}
 
+	@Override
+	public void add(CreateBrandRequest createBrandRequest) {
+
+		this.brandBusinessRules.checkIfBrandNameExists(createBrandRequest.getName());
+
+		Brand brand = this.modelMapperService.forRequest().map(createBrandRequest, Brand.class);
+		this.brandRepository.save(brand);
+	}
 
 	@Override
 	public void update(UpdateBrandRequest updateBrandRequest) {
+		this.brandBusinessRules.checkIfBrandNameExists(updateBrandRequest.getName());
 		Brand brand = this.modelMapperService.forRequest().map(updateBrandRequest, Brand.class);
-		System.out.println(brand);
+		
 		this.brandRepository.save(brand);
 		
 	}

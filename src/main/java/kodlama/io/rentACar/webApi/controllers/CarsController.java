@@ -13,43 +13,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import kodlama.io.rentACar.business.abstracts.ModelService;
-import kodlama.io.rentACar.business.requests.CreateModelRequest;
-import kodlama.io.rentACar.business.requests.UpdateModelRequest;
-import kodlama.io.rentACar.business.responses.GetAllModelsResponse;
-import kodlama.io.rentACar.business.responses.GetByIdModelResponse;
+import jakarta.validation.Valid;
+import kodlama.io.rentACar.business.abstracts.CarService;
+import kodlama.io.rentACar.business.requests.CreateCarRequest;
+import kodlama.io.rentACar.business.requests.UpdateCarRequest;
+import kodlama.io.rentACar.business.responses.GetAllCarsResponse;
+import kodlama.io.rentACar.business.responses.GetByIdCarResponse;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/api/models")
+@RequestMapping("/api/cars")
 @AllArgsConstructor
-public class ModelsController {
-	private ModelService modelService;
-
+public class CarsController {
+	private CarService carService;
+	
 	@GetMapping()
-	public List<GetAllModelsResponse> getAll() {
-		return modelService.getAll();
+	public List<GetAllCarsResponse> getAll(){
+		return this.carService.getAll();
 	}
 	
 	@GetMapping("/{id}")
-	public GetByIdModelResponse getById(@PathVariable int id) {
-		return modelService.getById(id);
+	public GetByIdCarResponse getById(@PathVariable int id) {
+		return this.carService.getById(id);
 	}
 	
 	@PostMapping()
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public void add(@RequestBody CreateModelRequest createModelRequest) {
-		this.modelService.add(createModelRequest);
+	public void add(@RequestBody CreateCarRequest createCarRequest) {
+		this.carService.add(createCarRequest);
 	}
 	
 	@PutMapping()
-	public void update(  UpdateModelRequest updateModelRequest) {
-		this.modelService.update(updateModelRequest);
+	public void update(@RequestBody @Valid UpdateCarRequest updateCarRequest) {
+		this.carService.update(updateCarRequest);
 	}
 	
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable int id) {
-		this.modelService.delete(id);
+		this.carService.delete(id);
 	}
-
 }

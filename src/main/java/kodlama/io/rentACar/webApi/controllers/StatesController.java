@@ -13,43 +13,42 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import kodlama.io.rentACar.business.abstracts.ModelService;
-import kodlama.io.rentACar.business.requests.CreateModelRequest;
-import kodlama.io.rentACar.business.requests.UpdateModelRequest;
-import kodlama.io.rentACar.business.responses.GetAllModelsResponse;
-import kodlama.io.rentACar.business.responses.GetByIdModelResponse;
+import kodlama.io.rentACar.business.abstracts.StateService;
+import kodlama.io.rentACar.business.requests.CreateStateRequest;
+import kodlama.io.rentACar.business.requests.UpdateStateRequest;
+import kodlama.io.rentACar.business.responses.GetAllStatesResponse;
+import kodlama.io.rentACar.business.responses.GetByIdStateResponse;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/api/models")
+@RequestMapping("/api/states")
 @AllArgsConstructor
-public class ModelsController {
-	private ModelService modelService;
-
+public class StatesController {
+	private StateService stateService;
+	
 	@GetMapping()
-	public List<GetAllModelsResponse> getAll() {
-		return modelService.getAll();
+	public List<GetAllStatesResponse> getAll(){
+		return this.stateService.getAll();
 	}
 	
 	@GetMapping("/{id}")
-	public GetByIdModelResponse getById(@PathVariable int id) {
-		return modelService.getById(id);
+	public GetByIdStateResponse getById(@PathVariable int id) {
+		return this.stateService.getById(id);
 	}
 	
 	@PostMapping()
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public void add(@RequestBody CreateModelRequest createModelRequest) {
-		this.modelService.add(createModelRequest);
+	public void add(@RequestBody CreateStateRequest createStateRequest) {
+		this.stateService.add(createStateRequest);
 	}
 	
 	@PutMapping()
-	public void update(  UpdateModelRequest updateModelRequest) {
-		this.modelService.update(updateModelRequest);
+	public void update(@RequestBody UpdateStateRequest updateStateRequest) {
+		this.stateService.update(updateStateRequest);
 	}
 	
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable int id) {
-		this.modelService.delete(id);
+		this.stateService.delete(id);
 	}
-
 }

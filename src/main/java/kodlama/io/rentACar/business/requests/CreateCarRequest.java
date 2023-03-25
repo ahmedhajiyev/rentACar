@@ -9,11 +9,16 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdateBrandRequest {
+public class CreateCarRequest {
 	@NotNull
 	@NotBlank
-	private int id;		
+	private String plate;
 	@NotNull
-	@NotBlank	
-	private String name;
+	private int dailyPrice;
+	@NotNull
+	private int modelYear;
+	@NotNull
+	private int stateId;
+	@NotNull
+	private int modelId;
 }
