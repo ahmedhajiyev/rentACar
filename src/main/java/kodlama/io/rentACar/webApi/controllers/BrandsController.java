@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,6 +20,7 @@ import kodlama.io.rentACar.business.requests.CreateBrandRequest;
 import kodlama.io.rentACar.business.requests.UpdateBrandRequest;
 import kodlama.io.rentACar.business.responses.GetAllBrandsResponse;
 import kodlama.io.rentACar.business.responses.GetByIdBrandResponse;
+import kodlama.io.rentACar.business.responses.GetByNameBrandResponse;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -35,7 +37,11 @@ public class BrandsController {
 	@GetMapping("/{id}")
 	public GetByIdBrandResponse getById(@PathVariable int id){
 		return brandService.getById(id);
+	}
 	
+	@GetMapping("/name")
+	public GetByNameBrandResponse getByName(@RequestParam String name) {
+		return this.brandService.getByName(name);
 	}
 	
 	@PostMapping()

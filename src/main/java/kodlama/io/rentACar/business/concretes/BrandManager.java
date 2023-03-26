@@ -10,6 +10,7 @@ import kodlama.io.rentACar.business.requests.CreateBrandRequest;
 import kodlama.io.rentACar.business.requests.UpdateBrandRequest;
 import kodlama.io.rentACar.business.responses.GetAllBrandsResponse;
 import kodlama.io.rentACar.business.responses.GetByIdBrandResponse;
+import kodlama.io.rentACar.business.responses.GetByNameBrandResponse;
 import kodlama.io.rentACar.business.rules.BrandBusinessRules;
 import kodlama.io.rentACar.core.utilities.mappers.ModelMapperService;
 import kodlama.io.rentACar.dataAccess.abstracts.BrandRepository;
@@ -47,6 +48,16 @@ public class BrandManager implements BrandService {
 		
 		return response;
 	}
+	
+	@Override
+	public GetByNameBrandResponse getByName(String name) {
+		Brand brand = this.brandRepository.findByNameIgnoreCase(name);
+
+		GetByNameBrandResponse response = this.modelMapperService.forResponse()
+				.map(brand, GetByNameBrandResponse.class);		
+
+		return response;
+	}
 
 	@Override
 	public void add(CreateBrandRequest createBrandRequest) {
@@ -72,5 +83,10 @@ public class BrandManager implements BrandService {
 		this.brandRepository.deleteById(id);
 		
 	}
+
+
+
+
+	
 
 }
