@@ -38,11 +38,11 @@ public class User implements UserDetails {
 	private String password;
 	
 	@Enumerated(EnumType.STRING)
-	private Role role;
+	private Authority authority;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return List.of(new SimpleGrantedAuthority(role.name()));
+		return List.of(Authority.valueOf(authority.getAuthority()));
 	}
 
 	@Override

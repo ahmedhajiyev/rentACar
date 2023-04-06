@@ -10,7 +10,7 @@ import kodlama.io.rentACar.business.auth.requests.RegisterRequest;
 import kodlama.io.rentACar.business.auth.responses.AuthenticationResponse;
 import kodlama.io.rentACar.core.utilities.config.JwtService;
 import kodlama.io.rentACar.dataAccess.abstracts.UserRepository;
-import kodlama.io.rentACar.entities.concretes.Role;
+import kodlama.io.rentACar.entities.concretes.Authority;
 import kodlama.io.rentACar.entities.concretes.User;
 import lombok.RequiredArgsConstructor;
 
@@ -30,7 +30,7 @@ public class AuthenticationService {
 									.lastname(registerRequest.getLastname())
 									.email(registerRequest.getEmail())
 									.password(passwordEncoder.encode(registerRequest.getPassword()))
-									.role(Role.USER)
+									.authority(Authority.ADMIN)
 									.build();
 		this.userRepository.save(user);
 		var jwtToken = jwtService.generateToken(user);
@@ -41,6 +41,7 @@ public class AuthenticationService {
 		authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(), authenticationRequest.getPassword()));
 		
 		var user = this.userRepository.findByEmail(authenticationRequest.getEmail()).orElseThrow();
+		System.out.println(user);
 		var jwtToken = jwtService.generateToken(user);
 		return AuthenticationResponse.builder().token(jwtToken).build();
 	}
