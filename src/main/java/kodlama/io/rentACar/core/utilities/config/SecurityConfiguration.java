@@ -1,7 +1,5 @@
 package kodlama.io.rentACar.core.utilities.config;
 
-import java.util.Locale;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -12,7 +10,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import kodlama.io.rentACar.entities.concretes.Authority;
 import lombok.RequiredArgsConstructor;
 
 @Configuration
@@ -45,4 +42,7 @@ public class SecurityConfiguration {
 		
 		return http.build();
 	}
+	
+	
+	
 }

@@ -13,5 +13,6 @@ public interface ModelService {
 	void add(CreateModelRequest createModelRequest);
 	void update(UpdateModelRequest updateModelRequest);
 	void delete(int id);
+	
 
 }

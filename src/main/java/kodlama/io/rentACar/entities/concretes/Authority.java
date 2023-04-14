@@ -6,6 +6,7 @@ import lombok.Getter;
 
 @Getter
 public enum Authority implements GrantedAuthority {
+
 	ADMIN,USER;
 
 	@Override

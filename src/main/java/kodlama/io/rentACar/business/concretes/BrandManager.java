@@ -20,12 +20,17 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Service
 public class BrandManager implements BrandService {
+
+
 	private BrandRepository brandRepository;
 	private ModelMapperService modelMapperService;
 	private BrandBusinessRules brandBusinessRules;
 
+
 	@Override
 	public List<GetAllBrandsResponse> getAll() {
+		
+		
 		
 		List<Brand> brands = brandRepository.findAll();
 		

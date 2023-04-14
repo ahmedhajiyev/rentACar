@@ -1,5 +1,6 @@
 package kodlama.io.rentACar;
 
+import java.security.Principal;
 import java.util.HashMap;
 
 import org.modelmapper.ModelMapper;
@@ -51,4 +52,18 @@ public class RentACarApplication {
 	public ModelMapper getModelMapper() {
 		return new ModelMapper();
 	}
+	
+	@Bean 
+	public String getString() {
+		return new String();
+	}
+	
+
+	
+
+	
+	
+	
+	
+
 }

@@ -31,5 +31,6 @@ public class AuthenticationController {
 	public AuthenticationResponse authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
 		return this.authenticationService.authenticate(authenticationRequest);
 	}
-
+	
+	
 }

@@ -41,7 +41,7 @@ public class AuthenticationService {
 		authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(), authenticationRequest.getPassword()));
 		
 		var user = this.userRepository.findByEmail(authenticationRequest.getEmail()).orElseThrow();
-		System.out.println(user);
+		
 		var jwtToken = jwtService.generateToken(user);
 		return AuthenticationResponse.builder().token(jwtToken).build();
 	}
