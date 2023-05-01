@@ -10,14 +10,12 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "userPermissions")
-
+@Table(name = "user_permissions")
 public class UserPermission {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,12 +23,21 @@ public class UserPermission {
 	
 	@ManyToOne
 	@JoinColumn(name="user_id")
-	private User userId;
+	private User user_id;
 	
 	@ManyToOne
 	@JoinColumn(name="permission_id")
-	private Permission permissionId;
+	private Permission permission_id;
 	
+
+//	
+//	@ManyToOne
+//	@MapsId("userId")
+//	private User user;
+//	
+//	@ManyToOne
+//	@MapsId("permissionId")
+//	private Permission permission;
 
 	
 	

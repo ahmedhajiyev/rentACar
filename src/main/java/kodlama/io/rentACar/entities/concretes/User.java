@@ -1,15 +1,20 @@
 package kodlama.io.rentACar.entities.concretes;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -49,8 +54,24 @@ public class User implements UserDetails {
 	@Enumerated(EnumType.STRING)
 	private Authority authority;
 	
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "userId")
-	private List<UserPermission> userPermissions;
+	
+	@OneToMany(fetch = FetchType.EAGER,
+			mappedBy = "user_id",
+			cascade = CascadeType.ALL,
+			orphanRemoval = true)
+	private List<UserPermission> permissions = new ArrayList<>();
+	
+//	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//	@JoinTable(name = "user_permission",
+//			joinColumns = @JoinColumn(name="user_id"),
+//			inverseJoinColumns = @JoinColumn(name="permission_id"))
+//	private Set<Permission> permissions = new HashSet<>();
+	
+//	@OneToMany(mappedBy = "user",
+//			cascade = CascadeType.ALL,
+//			orphanRemoval = true)
+//	private List<UserPermission> permissions = new ArrayList<>();
+	
 	
 	
 

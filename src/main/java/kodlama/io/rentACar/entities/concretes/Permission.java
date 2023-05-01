@@ -1,8 +1,9 @@
 package kodlama.io.rentACar.entities.concretes;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,11 +25,17 @@ public class Permission {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+
 	@Column(name="name")
 	private String name;
 	
-	@OneToMany(mappedBy = "permissionId")
-	private List<UserPermission> userPermissions;
+	@OneToMany(mappedBy = "permission_id", 
+			cascade = CascadeType.ALL, 
+			orphanRemoval = true)
+	private List<UserPermission> users = new ArrayList<>();
+	
+//	@ManyToMany(mappedBy = "permissions")
+//	private List<User> users = new ArrayList<>();
 	
 
 
